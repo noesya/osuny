@@ -1,5 +1,5 @@
 <a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push({alt: '', file: {}})">
+    v-on:click="data.elements.push({alt: '', file: {}, image: {}})">
     <%= t '.add_image' %>
 </a>
 
@@ -18,6 +18,14 @@
           </a>
         </div>
       </div>
+
+      <image-upload
+        upload-url="<%= rails_direct_uploads_url.html_safe %>"
+        blob-url-template="<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
+        :image="image.image"
+        @update="function(data) { image.image = data }"
+        ></image-upload>
+
       <img :src="getImageUrl(image.file)" class="img-fluid d-block" v-if="image.file.id" />
       <div class="card-body">
         <label  class="form-label"

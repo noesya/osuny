@@ -14,8 +14,17 @@ vueComponents.imageUpload = {
     props: [
         'upload-url',
         'blob-url-template',
-        'prout'
+        'image'
     ],
+    mounted: function() {
+        console.log(this.$props.image);
+        if (this.$props.image) {
+            this.$data.blob = this.$props.image.blob;
+            this.$data.id = this.$props.image.id;
+            this.$data.alt = this.$props.image.alt;
+            this.$data.credit = this.$props.image.credit;
+        }
+    },
     methods: {
         onFileImageChange: function (event) {
             'use strict';
@@ -23,7 +32,6 @@ vueComponents.imageUpload = {
             if (!files.length) {
                 return;
             }
-            console.log(this.$props);
             this.uploadFile(files[0]);
         },
         uploadFile: function (file) {
@@ -42,7 +50,6 @@ vueComponents.imageUpload = {
                 this.onUpdate();
 
             }.bind(this));
-
         },
         getImageUrl: function () {
             'use strict';
@@ -52,7 +59,15 @@ vueComponents.imageUpload = {
                 .replace(':filename', this.blob.filename);
         },
         onUpdate: function () {
-            this.$emit('input', this.id)
+            this.$emit('update', {
+                id: this.blob.id,
+                blob: {
+                    signed_id: this.blob.signed_id,
+                    filename: this.blob.filename
+                },
+                alt: this.alt,
+                credit: this.credit
+            });
         }
     },
     template: `
@@ -61,9 +76,24 @@ vueComponents.imageUpload = {
             <label>
                 Image
             </label>
-            <input type="file"
+            <input class="form-control"
+                type="file"
                 accept="image/*"
                 @change="onFileImageChange($event)">
+            <label>
+                Alt
+            </label>
+            <input class="form-control"
+                type="text"
+                v-model="alt"
+                @input="onUpdate">
+            <label>
+                Crédit
+            </label>
+            <input class="form-control"
+                type="text"
+                v-model="credit"
+                @input="onUpdate">
         </div>
         `
 };

@@ -6,10 +6,11 @@
     <span class="sr-only"><%= t 'loading' %></span>
   </div>
 
-  <image-upload 
+  <image-upload
     upload-url="<%= rails_direct_uploads_url.html_safe %>"
     blob-url-template="<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
-    v-model="data.image"
+    :image="data.image2"
+    @update="function(event){ data.image2 = event}"
     ></image-upload>
 
   <%= simple_form_for [:admin, @block] do |f| %>
