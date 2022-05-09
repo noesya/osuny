@@ -11,7 +11,7 @@ title ||= ''
   <input  class="form-control mb-2"
           type="file"
           accept="image/*"
-          @change="onFileImageChange( $event, data, 'image.id' )"
+          @change="onFileImageChange( $event, data.image, 'id' )"
           id="<%= root %>.<%= property %>.id">
 </div>
 <div v-if="data.image">
