@@ -15,7 +15,7 @@ title ||= ''
           id="<%= root %>.<%= property %>_id">
 </div>
 <div v-if="data.image">
-  <img :src="getImageUrl(<%= property %>_id)"
+  <img :src="getImageUrl(<%= root %>.<%= property %>_id)"
         class="img-fluid mb-2"
         style="max-height: 80px"
         />
