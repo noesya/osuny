@@ -1,6 +1,7 @@
       text: >-
         <%= prepare_html_for_static block.template.text, about.university %>
-      <%= render 'admin/communication/blocks/components/image/static', source: block.template.image %>
+      <%= render 'admin/communication/blocks/components/image/static',
+                  source: block.template.image %>
       button:
         text: >-
           <%= prepare_text_for_static block.template.button %>

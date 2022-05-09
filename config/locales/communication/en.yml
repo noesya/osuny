@@ -123,6 +123,16 @@ en:
   admin:
     communication:
       blocks:
+        components:
+          image:
+            add: Add image
+            remove: Remove image
+            alt:
+              label: Alternative text
+              placeholder: Enter text description
+            credit:
+              label: Credit
+              placeholder: Enter credit
         template_kinds:
           chapter:
             edit:
