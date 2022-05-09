@@ -29,6 +29,11 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
 
   protected
 
+  def initialize_data
+    super
+    block.data['image'] = {} unless block.data['image']
+  end
+
   def image_with_alt
     blob = find_blob data, 'image'
     return if blob.nil?

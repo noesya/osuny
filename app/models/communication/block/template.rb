@@ -18,6 +18,14 @@ class Communication::Block::Template
     []
   end
 
+  def data
+    unless @data
+      initialize_data
+      @data = block.data
+    end
+    @data
+  end
+
   protected
 
   def build_git_dependencies
@@ -37,8 +45,9 @@ class Communication::Block::Template
     university.active_storage_blobs.find id
   end
 
-  def data
-    block.data || {}
+  def initialize_data
+    block.data = {} unless block.data
+    block.data['elements'] = [] unless block.data['elements']
   end
 
   def elements

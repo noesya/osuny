@@ -1,9 +1,4 @@
 <% content_for :title, @block %>
-<%
-@block.data = {} if @block.data.nil? || @block.data.blank?
-# Default elements array to move outside : it is only required when block type has an elements list
-@block.data['elements'] ||= []
-%>
 <div id="app" v-cloak>
   <div class="spinner-border text-primary" role="status">
     <span class="sr-only"><%= t 'loading' %></span>
@@ -41,7 +36,7 @@
           url: "<%= rails_direct_uploads_url.html_safe %>",
           blobUrlTemplate: "<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
         },
-        data: <%= @block.data.to_json.html_safe %>
+        data: <%= @block.template.data.to_json.html_safe %>
       }
     },
     methods: {
