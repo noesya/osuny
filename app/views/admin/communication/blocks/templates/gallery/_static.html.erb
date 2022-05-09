@@ -1,5 +1,8 @@
       images:
 <% block.template.images_with_alt.each do |image| %>
+        - text: >
+            <%= prepare_text_for_static image.text %>
+          <%= render  'admin/communication/blocks/components/image/static', source: image, indent_depth: 5 %>
         - alt: >
             <%= prepare_text_for_static image.alt %>
           text: >

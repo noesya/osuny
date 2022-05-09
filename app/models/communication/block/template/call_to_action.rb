@@ -34,7 +34,8 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
     return if blob.nil?
     {
       blob: blob,
-      alt: data['image_alt']
+      alt: data['image_alt'],
+      credit: data['image_credit']
     }.to_dot
   end
 end

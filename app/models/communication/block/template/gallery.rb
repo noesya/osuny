@@ -21,7 +21,8 @@ class Communication::Block::Template::Gallery < Communication::Block::Template
     {
       blob: blob,
       alt: element['alt'],
-      text: element['text']
+      text: element['text'], # deprecated
+      credit: element['credit']
     }.to_dot
   end
 end

@@ -1,10 +1,6 @@
       text: >-
         <%= prepare_html_for_static block.template.text, about.university %>
-    <% if block.template.image %>
-      image:
-        file: "<%= block.template.image.blob.id %>"
-        alt: <%= prepare_text_for_static block.template.image.alt %>
-    <% end %>
+      <%= render 'admin/communication/blocks/components/image/static', source: block.template.image %>
       button:
         text: >-
           <%= prepare_text_for_static block.template.button %>
