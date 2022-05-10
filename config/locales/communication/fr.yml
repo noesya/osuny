@@ -136,6 +136,8 @@ fr:
               image_label: Image (.png, .jpg)
               alt_label: Texte alternatif
               alt_placeholder: Entrer la description textuelle
+              credit_label: Credit text
+              credit_placeholder: Enter credit
               text_label: Texte
               text_placeholder: Entrer le texte
               remove_image: Enlever l'image

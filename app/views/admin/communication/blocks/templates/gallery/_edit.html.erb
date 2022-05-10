@@ -1,5 +1,5 @@
 <a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push({alt: '', file: {}, image: {}})">
+    v-on:click="data.elements.push({alt: '', credit: '', file: {}})">
     <%= t '.add_image' %>
 </a>
 
@@ -18,16 +18,44 @@
           </a>
         </div>
       </div>
-
       <img :src="getImageUrl(image.file)" class="img-fluid d-block" v-if="image.file.id" />
       <div class="card-body">
-        <%= render 'admin/communication/blocks/components/file-upload/edit',
-            data: 'image.image' %>
-        <%= render 'admin/communication/blocks/components/textarea/edit',
-            label: t('.text_label'),
-            model: "image.text",
-            placeholder:  t('.text_placeholder'),
-            id: "'image-text-' + imageIndex" %>
+        <label  class="form-label"
+                :for="'image-file-' + imageIndex">
+          <%= t '.image_label' %>
+        </label>
+        <input  class="form-control mb-2"
+                type="file"
+                accept="image/*"
+                @change="onFileImageChange( $event, image, 'file' )"
+                :id="'image-file-' + imageIndex">
+        <div class="mb-3">
+          <label  aria-label="<%= t '.alt_label' %>"
+                  :for="'image-alt-' + imageIndex">
+                  <%= t '.alt_label' %>
+          </label>
+          <input  class="form-control"
+                  type="text"
+                  v-model="image.alt"
+                  placeholder="<%= t '.alt_placeholder' %>"
+                  :id="'image-alt-' + imageIndex">
+          <label  aria-label="<%= t '.credit_label' %>"
+                  :for="'image-credit-' + imageIndex">
+                  <%= t '.credit_label' %>
+          </label>
+          <input  class="form-control"
+                  type="text"
+                  v-model="image.credit"
+                  placeholder="<%= t '.credit_placeholder' %>"
+                  :id="'image-credit-' + imageIndex">
+          <label  aria-label="<%= t '.text_label' %>"
+                  :for="'image-text-' + imageIndex">
+                  <%= t '.text_label' %>
+          </label>
+          <textarea class="form-control"
+                  v-model="image.text"
+                  placeholder="<%= t '.text_placeholder' %>"
+                  :id="'image-text-' + imageIndex"></textarea>
         </div>
       </div>
     </div>

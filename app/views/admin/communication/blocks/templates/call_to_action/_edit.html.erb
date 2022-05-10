@@ -13,8 +13,48 @@
     </div>
   </div>
   <div class="col-xxl-4 col-md-6">
-    <%= render 'admin/communication/blocks/components/file-upload/edit',
-            data: 'data.image' %>
+    <div v-if="!data.image">
+      <%# TODO : create a uploader vue3 component %>
+      <label  class="form-label"
+              for="image">
+        <%= t '.image_title' %>
+      </label>
+      <input  class="form-control mb-2"
+              type="file"
+              accept="image/*"
+              @change="onFileImageChange( $event, data, 'image' )"
+              id="image">
+    </div>
+    <div v-if="data.image">
+      <img :src="getImageUrl(data.image)"
+            class="img-fluid"
+            style="max-height: 80px"
+            />
+      <br>
+      <a  class="btn btn-sm btn-danger mt-2"
+          v-on:click="data.image=null">
+          <i class="fas fa-times"></i>
+          <%= t '.remove_image' %>
+      </a>
+    </div>
+    <label  class="form-label"
+            for="image_alt">
+      <%= t '.image_alt_label' %>
+    </label>
+    <input id="image_alt"
+            type="text"
+            class="form-control"
+            v-model="data.image_alt"
+            placeholder="<%= t '.image_alt_placeholder' %>" />
+    <label  class="form-label"
+            for="image_alt">
+      <%= t '.image_credit_label' %>
+    </label>
+    <input id="image_credit"
+            type="text"
+            class="form-control"
+            v-model="data.image_credit"
+            placeholder="<%= t '.image_credit_placeholder' %>" />
   </div>
 </div>
 <h2><%= t '.buttons' %></h2>

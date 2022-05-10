@@ -27,7 +27,6 @@
 
 <%# Include vue.js before call Vue.createApp %>
 <%= javascript_include_tag 'vue' %>
-<%= render 'admin/communication/blocks/components/file-upload/vue.html.erb' %>
 
 <script>
   var app = Vue.createApp({
@@ -100,9 +99,9 @@
     }
   });
 
-  if (vueComponents.imageUpload) {
-    app.component('image-upload', vueComponents.imageUpload);
-  }
+  // if (vueComponents.imageUpload) {
+  //   app.component('image-upload', vueComponents.imageUpload);
+  // }
 
   window.addEventListener('load', function(){
     setTimeout(function() {
