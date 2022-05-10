@@ -19,30 +19,10 @@
         </div>
       </div>
 
-      <%= render 'admin/communication/blocks/components/file-upload/edit',
-            data: 'image.image' %>
-
       <img :src="getImageUrl(image.file)" class="img-fluid d-block" v-if="image.file.id" />
       <div class="card-body">
-        <label  class="form-label"
-                :for="'image-file-' + imageIndex">
-          <%= t '.image_label' %>
-        </label>
-        <input  class="form-control mb-2"
-                type="file"
-                accept="image/*"
-                @change="onFileImageChange( $event, image, 'file' )"
-                :id="'image-file-' + imageIndex">
-        <div class="mb-3">
-          <label  aria-label="<%= t '.alt_label' %>"
-                  :for="'image-alt-' + imageIndex">
-                  <%= t '.alt_label' %>
-          </label>
-          <input  class="form-control"
-                  type="text"
-                  v-model="image.alt"
-                  placeholder="<%= t '.alt_placeholder' %>"
-                  :id="'image-alt-' + imageIndex">
+        <%= render 'admin/communication/blocks/components/file-upload/edit',
+            data: 'image.image' %>
           <label  aria-label="<%= t '.text_label' %>"
                   :for="'image-text-' + imageIndex">
                   <%= t '.text_label' %>
