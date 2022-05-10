@@ -60,8 +60,8 @@ vueComponents.imageUpload = {
         },
         onUpdate: function () {
             this.$emit('update', {
-                id: this.blob.id,
                 blob: {
+                    id: this.blob.id,
                     signed_id: this.blob.signed_id,
                     filename: this.blob.filename
                 },
@@ -71,29 +71,34 @@ vueComponents.imageUpload = {
         }
     },
     template: `
-        <div>
-            <img :src="getImageUrl()" class="img-fluid d-block" v-if="blob" />
-            <label>
+        <div class="card-body">
+            <img :src="getImageUrl()" class="img-fluid d-block mb-2" v-if="blob" />
+            <label class="form-label">
                 Image
             </label>
-            <input class="form-control"
+            <input class="form-control mb-2"
                 type="file"
                 accept="image/*"
                 @change="onFileImageChange($event)">
-            <label>
-                Alt
+            <label class="form-label">
+                Texte alternatif
             </label>
-            <input class="form-control"
+            <input class="form-control mb-2"
                 type="text"
                 v-model="alt"
                 @input="onUpdate">
-            <label>
+            <label class="form-label">
                 Crédit
             </label>
-            <input class="form-control"
+            <input class="form-control mb-2"
                 type="text"
                 v-model="credit"
                 @input="onUpdate">
         </div>
         `
 };
+
+
+// Composant 1 : file uploader (avec ou sans preview en fonction du fichier)
+// Composant 2 : image uploader (alt + credit)
+// Composant 3 : image uploader avec unsplash

@@ -19,12 +19,8 @@
         </div>
       </div>
 
-      <image-upload
-        upload-url="<%= rails_direct_uploads_url.html_safe %>"
-        blob-url-template="<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
-        :image="image.image"
-        @update="function(data) { image.image = data }"
-        ></image-upload>
+      <%= render 'admin/communication/blocks/components/file-upload/edit',
+            data: 'image.image' %>
 
       <img :src="getImageUrl(image.file)" class="img-fluid d-block" v-if="image.file.id" />
       <div class="card-body">

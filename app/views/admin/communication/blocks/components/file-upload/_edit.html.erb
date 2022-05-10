@@ -1,0 +1,10 @@
+<% data ||= "image" %>
+
+<%= render 'admin/communication/blocks/components/file-upload/vue.html.erb' %>
+
+<image-upload
+    upload-url="<%= rails_direct_uploads_url.html_safe %>"
+    blob-url-template="<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
+    :image="<%= data %>"
+    @update="function(state){ <%= data %> = state }"
+    ></image-upload>

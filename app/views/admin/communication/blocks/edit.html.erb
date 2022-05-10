@@ -6,13 +6,6 @@
     <span class="sr-only"><%= t 'loading' %></span>
   </div>
 
-  <image-upload
-    upload-url="<%= rails_direct_uploads_url.html_safe %>"
-    blob-url-template="<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
-    :image="data.image2"
-    @update="function(event){ data.image2 = event}"
-    ></image-upload>
-
   <%= simple_form_for [:admin, @block] do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -106,9 +99,9 @@
     }
   });
 
-  // app.component('my-title', vueTitleComponent);
-  // app.component('button-counter', vueComponents.vueButtonCounter);
-  app.component('image-upload', vueComponents.imageUpload);
+  if (vueComponents.imageUpload) {
+    app.component('image-upload', vueComponents.imageUpload);
+  }
 
   window.addEventListener('load', function(){
     setTimeout(function() {
