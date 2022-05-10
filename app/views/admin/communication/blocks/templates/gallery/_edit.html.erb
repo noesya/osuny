@@ -23,14 +23,11 @@
       <div class="card-body">
         <%= render 'admin/communication/blocks/components/file-upload/edit',
             data: 'image.image' %>
-          <label  aria-label="<%= t '.text_label' %>"
-                  :for="'image-text-' + imageIndex">
-                  <%= t '.text_label' %>
-          </label>
-          <textarea class="form-control"
-                  v-model="image.text"
-                  placeholder="<%= t '.text_placeholder' %>"
-                  :id="'image-text-' + imageIndex"></textarea>
+        <%= render 'admin/communication/blocks/components/textarea/edit',
+            label: t('.text_label'),
+            model: "image.text",
+            placeholder:  t('.text_placeholder'),
+            id: "'image-text-' + imageIndex" %>
         </div>
       </div>
     </div>

@@ -1,0 +1,19 @@
+<% 
+label ||= ""
+placeholder ||= "..."
+model ||= ""
+id ||= model.parameterize + rand(0...10000) # TODO : generate unique id
+%>
+
+<label 
+    class="form-label"
+    aria-label="<%= label %>"
+    :for="<%= id %>">
+    <%= label %>
+</label>
+<textarea
+    class="form-control"
+    v-model="<%= model %>"
+    placeholder="<%= placeholder %>"
+    :id="<%= id %>">
+</textarea>
