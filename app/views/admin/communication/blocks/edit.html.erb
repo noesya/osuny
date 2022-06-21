@@ -51,11 +51,14 @@
         },
         data: <%= @block.data.to_json.html_safe %>,
         <% if @block.template.default_element %>
-        defaultElement: <%= @block.template
-                                  .default_element
-                                  .default_data
-                                  .to_json
-                                  .html_safe %>
+          <% element =  @block.template
+                              .default_element
+                              .default_data
+                              .to_json
+                              .html_safe %>
+        defaultElement: <%= element %>,
+        currentElement: <%= element %>,
+        elementSelected: false
         <% end %>
       }
     },

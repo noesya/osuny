@@ -1,17 +1,37 @@
 <div class="row">
   <div class="col-xl-6">
     <%= block_component_edit :description %>
+    <%= block_component_add_element t('.add_image') %>
   </div>
   <div class="col-xl-6">
     <%= block_component_edit :layout %>
   </div>
 </div>
 
-<%= block_component_add_element t('.add_image') %>
+
+<div v-show="elementSelected">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title mb-0">Image en cours d'édition</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <%= block_component_edit :image, template: @element, model: 'currentElement' %>
+        </div>
+        <div class="col-lg-6">
+          <%= block_component_edit :alt, template: @element, model: 'currentElement' %>
+          <%= block_component_edit :credit, template: @element, model: 'currentElement' %>
+          <%= block_component_edit :text, template: @element, model: 'currentElement' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <draggable :list="data.elements" handle=".imageHandle">
-  <div  v-for="(element, index) in data.elements">
-    <div class="card">
+  <div v-for="(element, index) in data.elements">
+    <div class="card" v-on:click="elementSelected = true; currentElement = element">
       <div class="card-header border-bottom">
         <a class="btn ps-0 pt-0 imageHandle">
           <i class="fa fa-bars handle"></i>

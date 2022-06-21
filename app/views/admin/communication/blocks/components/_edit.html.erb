@@ -5,12 +5,12 @@ i18n = "admin.communication.blocks.templates.#{template.kind}.edit"
 template ||= @block.template
 root_template = template == @block.template
 if root_template
-  model = 'data'
+  model ||= 'data'
   dom_id = "'#{property}'"
   i18n_component = "#{i18n}.#{property}"
 else
   # Nested element
-  model = 'element'
+  model ||= 'element'
   dom_id = "'element-' + index + '-#{property}'"
   i18n_component = "#{i18n}.element.#{property}"
 end
