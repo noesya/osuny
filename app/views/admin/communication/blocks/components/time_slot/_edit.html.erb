@@ -1,0 +1,21 @@
+<% rows ||= 3 %>
+
+<div class="d-flex align-items-center mb-2">
+  <label  class="form-label me-1 mb-0" 
+          aria-label="<%= label %>">
+    <%= label %> De 
+  </label>
+  <input  class="form-control me-1"
+          v-model="<%= model %>.<%= property %>.from"
+          placeholder="<%= placeholder %> from"
+          type="time" />
+
+  <label  class="form-label me-1  mb-0" 
+          aria-label="<%= label %>">
+    <%= label %> à 
+  </label>
+  <input  class="form-control"
+          v-model="<%= model %>.<%= property %>.to"
+          placeholder="<%= placeholder %> to"
+          type="time" />
+</div>

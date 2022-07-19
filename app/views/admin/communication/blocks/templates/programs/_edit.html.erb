@@ -1,0 +1,30 @@
+<% pages = collection_tree(@block.university.programs) %>
+
+<div class="row mb-4">
+  <div class="col-lg-6">
+    <div class="mb-4">
+      <%= block_component_add_element t('.selection.add') %>
+      <draggable :list="data.elements" handle=".dragHandle" class="list-group">
+        <div v-for="(element, index) in data.elements" class="list-group-item">
+          <div class="d-flex mb-n3">
+            <div>
+              <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
+                <i class="fa fa-bars handle"></i>
+              </a>
+            </div>
+            <div class="flex-fill">
+              <%= block_component_edit :id, template: @element %>
+            </div>
+            <div>
+              <a  class="btn btn-sm btn-danger ms-3"
+                  v-on:click="data.elements.splice(data.elements.indexOf(page), 1)"
+                  title="Supprimer">
+                  <i class="fas fa-times"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </draggable>
+    </div>
+  </div>
+</div>

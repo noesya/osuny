@@ -1,0 +1,10 @@
+<%= block_component_static :name %>
+<%= block_component_static :address %>
+<%= block_component_static :phone_numbers %>
+<%= block_component_static :emails %>
+      timetable:
+<% block.template.elements.each do |element| %>
+<%= block_component_static :title, template: element, list: true, depth: 4 %>
+<%= block_component_static :time_slot_morning, template: element, depth: 5 %>
+<%= block_component_static :time_slot_afternoon, template: element, depth: 5 %>
+<% end %>

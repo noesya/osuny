@@ -1,0 +1,78 @@
+<%# TODO: traduction  %>
+
+<h3 class="h4">Contact</h3>
+
+<div class="row">
+  <div class="col-md-4">
+    <%= block_component_edit :name,
+        label: "Nom (personne, établissement...)",
+        placeholder: t('admin.communication.blocks.components.text.placeholder') %>
+
+    <%= block_component_edit :address,
+        label: "Adresse",
+        placeholder: t('admin.communication.blocks.components.text.placeholder') %>
+
+  </div>
+  <div class="col-md-4">
+    <h3 class="h4">Téléphones</h3>
+
+    <div v-for="(element, index) in data.phone_numbers" class="list-group-item">
+      <div class="d-flex">
+        <input type="tel"
+            class="form-control" 
+            maxlength="12"
+            v-model="data.phone_numbers[index]">
+        <a class="btn btn-danger ms-2"
+            v-on:click="data.phone_numbers.splice(index, 1)">
+            <i class="fas fa-times"></i>
+        </a>
+      </div>
+    </div>
+
+    <a  class="btn btn-primary mt-1"
+        v-on:click="data.phone_numbers.push('')">
+        <i class="fas fa-plus"></i> ajouter une numéro de téléphone
+    </a>
+  </div>
+  <div class="col-md-4">
+    <h3 class="h4">Emails</h3>
+
+    <div v-for="(element, index) in data.emails" class="list-group-item">
+      <div class="d-flex">
+        <input type="email"
+            class="form-control" 
+            v-model="data.emails[index]">
+        <a class="btn btn-danger ms-2"
+            v-on:click="data.emails.splice(index, 1)">
+            <i class="fas fa-times"></i>
+        </a>
+      </div>
+    </div>
+
+    <a  class="btn btn-primary  mt-1"
+        v-on:click="data.emails.push('')">
+        <i class="fas fa-plus"></i> ajouter un email
+    </a>
+
+  </div>
+</div>
+
+<h3 class="h4 mt-5">Horaires</h3>
+
+<div class="row">
+  <div v-for="(element, index) in data.elements" class="col-md-4">
+    <div class="card">
+      <a  class="btn btn-sm btn-danger position-absolute top-0 end-0"
+          v-on:click="data.elements.splice(index, 1)">
+          <i class="fas fa-times"></i>
+      </a>
+      <div class="card-body">
+        <%= block_component_edit :title, template: @element, label: 'Jour' %>
+        <%# TODO: Refactor des créneaux horaires  %>
+        <%= block_component_edit :time_slot_morning, template: @element %>
+        <%= block_component_edit :time_slot_afternoon, template: @element %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= block_component_add_element 'Ajouter un créneau horaire' %>

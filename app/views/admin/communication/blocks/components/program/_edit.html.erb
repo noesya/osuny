@@ -1,0 +1,19 @@
+<%
+program = current_university.programs.ordered
+%>
+<label  class="form-label"
+        :for="<%= dom_id.html_safe %>">
+  <%= label %>
+</label>
+<select :id="<%= dom_id.html_safe %>"
+        class="form-select select mb-3"
+        v-model="<%= model %>.<%= property %>">
+  <% if placeholder %>
+    <option value="" disabled><%= placeholder %></option>
+  <% end %>
+  <% program.each do |program| %>
+    <option value="<%= program.id %>">
+      <%= program %>
+    </option>
+  <% end %>
+</select>

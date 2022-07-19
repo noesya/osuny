@@ -51,13 +51,15 @@ class Communication::Block < ApplicationRecord
     partners: 200,
     posts: 500,
     pages: 600,
+    contact: 57,
+    programs: 58
   }
 
   CATEGORIES = {
     basic: [:chapter, :image, :video, :datatable],
     storytelling: [:key_figures, :gallery, :call_to_action, :testimonials, :timeline],
-    references: [:pages, :posts, :organization_chart, :partners],
-    utilities: [:files, :definitions, :embed]
+    references: [:pages, :posts, :organization_chart, :partners, :programs],
+    utilities: [:files, :definitions, :embed, :contact]
   }
 
   scope :published, -> { where(published: true) } 
