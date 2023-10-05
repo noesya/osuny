@@ -1,6 +1,8 @@
 <div class="row pure__row--small">
   <div class="col-md-6">
-    <%= block_component_edit block, :file %>
+    <%= block_component_edit block, :file,
+            accept: '.mp3,.wav,.ogg,.m4a',
+            hint: t('admin.communication.blocks.templates.sound.edit.file.hint') %>
     <%= block_component_edit block, :title %>
   </div>
   <div class="col-md-6">

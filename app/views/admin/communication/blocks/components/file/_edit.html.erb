@@ -1,6 +1,7 @@
 <%
 label = t 'admin.communication.blocks.components.file.input.label'
 remove = t 'admin.communication.blocks.components.file.input.remove'
+accept ||= '*'
 %>
 <div class="mb-3">
   <div v-if="!<%= model %>.<%= property %>.id">
@@ -10,7 +11,7 @@ remove = t 'admin.communication.blocks.components.file.input.remove'
     </label>
     <input  class="form-control"
             type="file"
-            accept="*"
+            accept="<%= accept %>"
             @change="onFileImageChange( $event, <%= model %>, '<%= property %>' )"
             data-size-limit="<%= Communication::Block::FILE_MAX_SIZE %>"
             :id="<%= dom_id.html_safe %>">
@@ -23,4 +24,7 @@ remove = t 'admin.communication.blocks.components.file.input.remove'
       <%= remove %>
     </a>
   </div>
+  <% if hint %>
+    <div class="form-text"><%= hint %></div>
+  <% end %>
 </div>

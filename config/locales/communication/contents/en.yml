@@ -439,7 +439,7 @@ en:
             description: An audio recording with a text transcription for a proper accessibility.
             edit:
               file:
-                label: Audio file encoded for the Web (.mp3, .m4a...)
+                hint: Audio file encoded for the Web (.mp3, .m4a, .ogg, .wav)
               title:
                 label: Recording title
                 placeholder: Enter the title

@@ -439,7 +439,7 @@ fr:
             description: Un enregistrement audio, avec sa transcription pour l'accessibilité.
             edit:
               file:
-                label: Fichier audio pour diffusion Web (.mp3, .m4a...)
+                hint: Fichier audio pour diffusion Web (.mp3, .m4a, .ogg, .wav)
               title:
                 label: Titre de l'enregistrement
                 placeholder: Entrer le titre
