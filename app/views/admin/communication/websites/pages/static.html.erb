@@ -1,7 +1,9 @@
 ---
-title: >
-  <%= @about.title %>
-breadcrumb_title: "<%= @about.breadcrumb_title.blank? ? @about.title : @about.breadcrumb_title  %>"
+title: "<%= @about.title %>"
+breadcrumb_title: "<%= @about.best_title  %>"
+<%= render 'admin/application/static/breadcrumbs', 
+            pages: @about.ancestors,
+            current: @about %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design' %>
 <% if @about.static_layout %>
@@ -25,7 +27,7 @@ children:
 @about.children.published.ordered.each do |child|
   next unless child.is_listed_among_children?
 %>
-  - <%= child.path %>
+  - "<%= child.git_path(@website) %>"
 <% end %>
 <% end %>
 <%= render 'admin/application/meta_description/static' %>

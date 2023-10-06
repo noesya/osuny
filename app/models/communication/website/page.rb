@@ -114,6 +114,10 @@ class Communication::Website::Page < ApplicationRecord
     abouts_with_page_block
   end
 
+  def best_title
+    breadcrumb_title.blank? ? title : breadcrumb_title
+  end
+
   def to_s
     "#{title}"
   end

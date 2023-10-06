@@ -1,6 +1,9 @@
 ---
 title: >
   <%= @about.to_s %>
+<%= render 'admin/application/static/breadcrumbs', 
+            pages: @website.special_page(Communication::Website::Page::Organization).ancestors_and_self,
+            current: @about %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 kind:

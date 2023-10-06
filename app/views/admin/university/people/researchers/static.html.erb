@@ -1,6 +1,14 @@
 ---
 title: >
   Publications de <%= @about.to_s %>
+breadcrumbs:
+<% @website.special_page(Communication::Website::Page::Person).ancestors_and_self.each do |page| %>
+  - title: "<%= page.best_title %>"
+    path: "<%= page.path %>"
+<% end %>
+  - title: "<%= @about.to_s %>"
+    path: "<%= @about.person.current_permalink_in_website(@website)&.path %>"
+  - title: "Publications"
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 person: >

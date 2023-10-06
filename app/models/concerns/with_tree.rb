@@ -18,6 +18,10 @@ module WithTree
                   : []
     end
 
+    def ancestors_and_self
+      ancestors + [self]
+    end
+
     def descendants
       has_children? ? children.ordered.map { |child| [child, child.descendants].flatten }.flatten
                     : []

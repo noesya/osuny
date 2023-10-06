@@ -1,5 +1,11 @@
-<% if block.template.page %>
-      page: <%= block.template.page.path %>
+<% 
+if block.template.page 
+  page = block.template.page
+%>
+      page: 
+        path: "<%= page.path %>"
+        slug: "<%= page.slug %>"
+        file: "<%= page.git_path(@website) %>"
 <% end %>
       show_main_description: <%= block.template.show_main_description %>
       show_descriptions: <%= block.template.show_description %>
