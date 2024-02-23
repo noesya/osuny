@@ -84,7 +84,10 @@ module WithDependencies
     # Si l'objet ne doit pas être ajouté on n'ajoute pas non plus ses dépendances récursives
     # C'est le fait de couper ici qui évite la boucle infinie
     return array unless dependency_should_be_added?(array, dependency, syncable_only)
-    array << dependency
+    if dependency.is_a?(ActiveRecord::Base)
+      dependency_global_id = dependency.to_global_id.to_s
+      array << dependency_global_id
+    end
     return array if !follow_direct && dependency.try(:is_direct_object?)
     return array unless dependency.respond_to?(:recursive_dependencies)
     dependency.recursive_dependencies(array: array, syncable_only: syncable_only, follow_direct: follow_direct)
@@ -93,7 +96,9 @@ module WithDependencies
   # Si l'objet est déjà là, on ne doit pas l'ajouter
   # Si l'objet n'est pas syncable, on ne doit pas l'ajouter non plus
   def dependency_should_be_added?(array, dependency, syncable_only)
-    !dependency.in?(array) && dependency_should_be_synced?(dependency, syncable_only)
+    return true unless dependency.is_a?(ActiveRecord::Base)
+    dependency_global_id = dependency.to_global_id.to_s
+    !dependency_global_id.in?(array) && dependency_should_be_synced?(dependency, syncable_only)
   end
 
   # Si on n'est pas en syncable only on liste tout, sinon, il faut analyser
@@ -117,7 +122,7 @@ module WithDependencies
       clean_websites(websites_to_clean.pluck(:id))
     end
   end
-  
+
   def clean_websites(websites_ids)
     # Les objets directs et les objets indirects (et les websites) répondent !
     return unless respond_to?(:is_direct_object?)

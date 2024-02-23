@@ -136,8 +136,8 @@ class Communication::Website < ApplicationRecord
     return unless website.git_repository.valid?
     if syncable?
       Communication::Website::GitFile.sync website, self
-      recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
-        Communication::Website::GitFile.sync website, object
+      recursive_dependencies(syncable_only: true, follow_direct: true).each do |dependency_global_id|
+        Communication::Website::GitFile.sync website, GlobalID::Locator.locate(dependency_global_id)
       end
       references.each do |object|
         Communication::Website::GitFile.sync website, object

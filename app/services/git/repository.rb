@@ -16,14 +16,12 @@ class Git::Repository
       analyzer.git_file = git_file
       @commit_message = analyzer.commit_message
     end
-    git_files << git_file
+    analyze_git_file(git_file)
   end
 
   def sync!
     return if git_files.empty?
-    puts "Start sync"
-    sync_git_files
-    mark_as_synced if provider.push(commit_message)
+    # mark_as_synced if provider.push(commit_message)
   end
 
   def update_theme_version!
@@ -67,21 +65,22 @@ class Git::Repository
     @analyzer ||= Git::Analyzer.new self
   end
 
-  def sync_git_files
-    git_files.each do |git_file|
-      analyzer.git_file = git_file
-      if analyzer.should_create?
-        puts "Syncing - Creating #{git_file.path}"
-        provider.create_file git_file.path, git_file.to_s
-      elsif analyzer.should_update?
-        puts "Syncing - Updating #{git_file.path}"
-        provider.update_file git_file.path, git_file.previous_path, git_file.to_s
-      elsif analyzer.should_destroy?
-        puts "Syncing - Destroying #{git_file.previous_path}"
-        provider.destroy_file git_file.previous_path
-      else
-        puts "Syncing - Nothing to do with #{git_file.path}"
-      end
+  def analyze_git_file(git_file)
+    analyzer.git_file = git_file
+    if analyzer.should_create?
+      puts "Syncing - Creating #{git_file.path}"
+      provider.create_file git_file.path, git_file.to_s
+      git_files << git_file
+    elsif analyzer.should_update?
+      puts "Syncing - Updating #{git_file.path}"
+      provider.update_file git_file.path, git_file.previous_path, git_file.to_s
+      git_files << git_file
+    elsif analyzer.should_destroy?
+      puts "Syncing - Destroying #{git_file.previous_path}"
+      provider.destroy_file git_file.previous_path
+      git_files << git_file
+    else
+      puts "Syncing - Nothing to do with #{git_file.path}"
     end
   end
 
