@@ -87,10 +87,12 @@ module WithDependencies
   def recursive_dependencies_with_static_file(array, dependency)
     # Si c'est un brouillon on s'arrête, quel que soit l'objet
     return unless dependency_is_syncable?(dependency)
-    # On ajoute la dépendance si elle a un fichier statique (ex: page, personne...) 
+    # On ajoute la dépendance si elle a un fichier statique (ex: page, personne...)
     if dependency_should_be_listed_as_static_file?(dependency)
+      # Si la dépendance a déjà été listée, on peut s'arrêter là
+      return array if dependency_global_id.in?(array)
       dependency_global_id = dependency.to_global_id.to_s
-      array << dependency_global_id unless dependency_global_id.in?(array)
+      array << dependency_global_id
     end
     # On explore les dépendances des blocs, même s'ils n'ont pas de fichier statique
     dependency.dependencies.each do |sub_dependency|
