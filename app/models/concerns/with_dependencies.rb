@@ -78,7 +78,32 @@ module WithDependencies
     @recursive_dependencies_syncable_following_direct ||= recursive_dependencies(syncable_only: true, follow_direct: true)
   end
 
+  def dependencies_with_static_file
+    recursive_dependencies_with_static_file([], self).compact
+  end
+
+  # Exemple 1 : University::Person : recursive_dependencies_with_static_file(array, person)
+  # person.dependencies contient blob
+  def recursive_dependencies_with_static_file(array, dependency)
+    # Si c'est un brouillon on s'arrête, quel que soit l'objet
+    return unless dependency_is_syncable?(dependency)
+    # On ajoute la dépendance si elle a un fichier statique (ex: page, personne...) 
+    array << dependency.to_global_id.to_s if dependency_should_be_listed_as_static_file?(dependency)
+    # On explore les dépendances des blocs, même s'ils n'ont pas de fichier statique
+    dependency.dependencies.each do |sub_dependency|
+      recursive_dependencies_with_static_file(array, sub_dependency)
+    end if dependency.respond_to?(:dependencies)
+    array
+  end
+
   protected
+
+  def dependency_should_be_listed_as_static_file?(dependency)
+    # Pas de components ou de templates
+    dependency.is_a?(ActiveRecord::Base) &&
+    # Pas de blocks ou de headings
+    dependency.try(:exportable_to_git?)
+  end
 
   def recursive_dependencies_add(array, dependency, syncable_only, follow_direct)
     # Si l'objet ne doit pas être ajouté on n'ajoute pas non plus ses dépendances récursives
@@ -103,7 +128,11 @@ module WithDependencies
 
   # Si on n'est pas en syncable only on liste tout, sinon, il faut analyser
   def dependency_should_be_synced?(dependency, syncable_only)
-    !syncable_only || (dependency.respond_to?(:syncable?) && dependency.syncable?)
+    !syncable_only || dependency_is_syncable?(dependency)
+  end
+
+  def dependency_is_syncable?(dependency)
+    dependency.respond_to?(:syncable?) && dependency.syncable?
   end
 
   # Stockage en RAM des dépendances avant enregistrement
