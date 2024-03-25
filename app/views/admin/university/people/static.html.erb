@@ -38,9 +38,11 @@ contact_details:
 <%= render 'admin/application/static/contact_detail', variable: :phone_personal, data: @about.phone_personal, kind: ContactDetails::Phone %>
 <%= render 'admin/application/static/contact_detail', variable: :email, data: @about.email, kind: ContactDetails::Email %>
 <% if @about.best_picture.attached? %>
-image: "<%= @about.best_picture.blob.id %>"
-credit: >-
-  <%= prepare_html_for_static @about.picture_credit %>
+image: 
+  - id: "<%= @about.best_picture.blob.id %>"
+  - alt: ""
+  - credit: 
+    <%= prepare_html_for_static @about.picture_credit %>
 <% end %>
 roles:
 <% if @about.author.for_website?(@website) %>
