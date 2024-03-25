@@ -7,12 +7,19 @@ module Communication::Website::WithConnectedObjects
     after_save :connect_about, if: :saved_change_to_about_id?
   end
 
+  def direct_objects
+    pages +
+    posts + 
+    post_categories +
+    events +
+    agenda_categories +
+    projects + 
+    portfolio_categories +
+    menus
+  end
+
   def clean_and_rebuild
-    pages.find_each(&:connect_dependencies)
-    posts.find_each(&:connect_dependencies)
-    post_categories.find_each(&:connect_dependencies)
-    agenda_categories.find_each(&:connect_dependencies)
-    menus.find_each(&:connect_dependencies)
+    direct_objects.find_each(&:connect_dependencies)
     connect(about, self) if about.present?
     destroy_obsolete_connections
     # In the same job
