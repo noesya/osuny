@@ -140,9 +140,25 @@
           followingToolbar: true,
           disableDragAndDrop: true,
           codemirror: window.codemirrorManager.defaultConfig(),
+          buttons: {
+            note: window.summernoteManager.note
+          },
           callbacks: {
             onChange: onChangeCallback,
-            onChangeCodeview: onChangeCallback
+            onChangeCodeview: onChangeCallback,
+            onBlur: function (e) {
+              var editor = $(this).parent().children('.note-editor');
+              editor.addClass('note-editor--defocusing');
+              setTimeout(function () {
+                if (editor.hasClass('note-editor--defocusing')) {
+                  editor.removeClass('note-editor--focus');
+                }
+              }, 1000);
+            },
+            onFocus: function (e) {
+              $(this).parent().children('.note-editor').removeClass('note-editor--defocusing');
+              $(this).parent().children('.note-editor').addClass('note-editor--focus');
+            }
           }
         });
       },

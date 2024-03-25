@@ -1,7 +1,23 @@
 /*global $ */
 window.summernoteManager = {
     configs: {},
-
+    note: function (context) {
+        var ui = $.summernote.ui;
+        
+        // create button
+        var button = ui.button({
+            contents: '<i class="fa-regular fa-note-sticky"/>',
+            tooltip: 'Transformer en note',
+            click: function () {
+                var text = context.invoke('editor.getSelectedText');
+                var note = '<note>' + text + '</note>';
+                var $node = $(note);
+                context.invoke('editor.insertNode', $node[0]);
+            }
+        });
+        
+        return button.render();   // return button as jquery object
+    },
     init: function () {
         'use strict';
         this.setConfigs();
@@ -11,55 +27,60 @@ window.summernoteManager = {
 
     setConfigs: function () {
         'use strict';
-        this.setConfig('link', {
-            toolbar: [
-                ['insert', ['link', 'unlink']]
-            ],
-            followingToolbar: true,
-            disableDragAndDrop: true,
-            callbacks: {
-                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['a'], ['href', 'target'])
-            }
-        });
+        this.setConfig('link', 
+            ['insert', ['link', 'unlink']],
+            null,
+            ['a'],
+            ['href', 'target']
+        );
 
-        this.setConfig('mini', {
-            toolbar: [
+        this.setConfig('mini',
+            [
                 ['font', ['bold', 'italic']],
                 ['position', ['superscript']],
                 ['insert', ['link', 'unlink']],
                 ['view', ['codeview']]
             ],
-            followingToolbar: true,
-            disableDragAndDrop: true,
-            callbacks: {
-                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['b', 'strong', 'i', 'em', 'sup', 'a'], ['href', 'target'])
-            }
-        });
+            null,
+            ['b', 'strong', 'i', 'em', 'sup', 'a'], 
+            ['href', 'target']
+        );
 
-        this.setConfig('mini-list', {
-            toolbar: [
+        this.setConfig('mini-list', 
+            [
                 ['font', ['bold', 'italic']],
                 ['position', ['superscript']],
                 ['para', ['ul', 'ol']],
                 ['insert', ['link', 'unlink']],
                 ['view', ['codeview']]
             ],
-            followingToolbar: true,
-            disableDragAndDrop: true,
-            callbacks: {
-                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'], ['href', 'target'])
-            }
-        });
+            null,
+            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'], 
+            ['href', 'target']
+        );
 
-        this.setConfig('default', {
-            toolbar: [
+        this.setConfig('mini-list-with-notes', 
+            [
+                ['font', ['bold', 'italic']],
+                ['position', ['superscript']],
+                ['para', ['ul', 'ol']],
+                ['insert', ['link', 'unlink', 'note']],
+                ['view', ['codeview']]
+            ],
+            null,
+            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'], 
+            ['href', 'target']
+        );
+
+        this.setConfig('default', 
+            [
                 ['style', ['style']],
                 ['font', ['bold', 'italic']],
                 ['position', ['superscript', 'subscript']],
                 ['para', ['ul', 'ol']],
                 ['view', ['codeview']]
             ],
-            styleTags: [
+            [
                 'p',
                 'blockquote',
                 'pre',
@@ -67,19 +88,24 @@ window.summernoteManager = {
                 'h3',
                 'h4'
             ],
-            followingToolbar: true,
-            disableDragAndDrop: true,
-            callbacks: {
-                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['b', 'strong', 'i', 'em', 'sup', 'sub', 'a', 'ul', 'ol', 'li', 'p', 'blockquote', 'pre', 'h2', 'h3', 'h4'], ['href', 'target'])
-            }
-        });
+            ['b', 'strong', 'i', 'em', 'sup', 'sub', 'a', 'ul', 'ol', 'li', 'p', 'blockquote', 'pre', 'h2', 'h3', 'h4'], 
+            ['href', 'target']
+        );
 
         window.SUMMERNOTE_CONFIGS = this.configs;
     },
 
-    setConfig: function (key, data) {
+    setConfig: function (key, toolbar, styleTags, tags, attributes) {
         'use strict';
-        this.configs[key] = data;
+        this.configs[key] = {
+            toolbar: toolbar,
+            styleTags: styleTags,
+            followingToolbar: true,
+            disableDragAndDrop: true,
+            callbacks: {
+                onPaste: this.pasteSanitizedClipboardContent.bind(this, tags, attributes)
+            }
+        };
     },
 
     initEditors: function () {

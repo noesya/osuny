@@ -17,7 +17,47 @@
       margin-top: 0;
       padding-top: 0;
     }
+    .note {
+      position: relative;
+    }
+    .note__call {
+      background: #CCCCCC;
+      border-radius: 4px;
+      color: #000000;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 2px 6px;
+      margin-left: 2px;
+    }
+    .note__content {
+      display: none;
+      background: #CCCCCC;
+      border-radius: 4px;
+      position: absolute;
+      width: 450px;
+      padding: 10px;
+      top: 6px;
+      right: -5px;
+      font-size: 16px;
+      line-height: 140%;
+    }
+    .note--visible .note__content {
+      display: block;
+    } 
+    .note__content, 
+    .note__content * {
+      color: #000000;
+    }
     </style>
+    <script nonce="<%= request.content_security_policy_nonce %>">
+      var notes = document.getElementsByClassName("note");
+      for (var i = 0; i < notes.length; i++) {
+        var note = notes[i];
+        note.addEventListener('click', function (event) {
+          note.classList.add('.note--visible');
+        })
+      }
+    </script>
     <% if content_for?(:leaflet_required) %>
       <%= stylesheet_link_tag 'leaflet', media: 'all' %>
       <%= javascript_include_tag 'leaflet' %>

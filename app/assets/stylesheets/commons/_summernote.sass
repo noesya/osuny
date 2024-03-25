@@ -1,27 +1,55 @@
 .summernote
     color: black
     .note-editor
+        background: white
+        .note-toolbar
+            opacity: 0
+            transition: opacity 0.25s
+            pointer-events: none
+        &--focus
+            .note-toolbar
+                pointer-events: auto
+                opacity: 1
         .note-editing-area
+            background: white
             .note-editable
+                padding-top: 5px
                 min-height: 50px
                 *
-                    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif
-                &, p, div
-                    font-size: 1rem
+                    font-family: $font-family-sans-serif
+                &, 
+                p, 
+                div
+                    font-size: px2rem(20)
+                    line-height: px2rem(30)
+                    @include media-breakpoint-down(md)
+                        font-size: px2rem(16)
+                        line-height: px2rem(24)
+                p
+                    &:last-of-type
+                        margin-bottom: 0
                 sup
                     top: inherit
                     padding-left: 2px
+                img,
+                video
+                    height: auto
+                    max-width: 100%
+                > h2:first-of-type
+                    margin-top: 0
+                note
+                    border: 1px solid #AAAAAA
+                    border-radius: 4px
+                    display: inline
+                    font-size: 14px
+                    margin-left: 2px
+                    padding: 2px 4px
+                    vertical-align: 2px
     b
         color: black
         font-weight: bold
     .note-btn.dropdown-toggle:after
         margin-left: 10px
-    .note-editable
-        img, video
-            height: auto
-            max-width: 100%
-        p:last-of-type
-            margin-bottom: 0
     button
         background: transparent
         border: none
@@ -33,10 +61,6 @@
         padding-left: 1rem
     h2
         margin-top: 2rem
-    .note-editable > h2:first-of-type
-        margin-top: 0
-    .note-editing-area
-        background: white
     .sn-checkbox-open-in-new-window
         label
             padding: 0

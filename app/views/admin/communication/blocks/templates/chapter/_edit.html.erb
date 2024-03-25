@@ -1,12 +1,11 @@
 <%= block_component_edit block, :layout %>
 
-<div class="row pure__row--small mb-4">
-  <div class="col-xxl-8">
+<div class="row">
+  <div class="col-xxl-9">
     <%= block_component_edit block, :text %>
     <%= block_component_edit block, :notes %>
-  </div>
-  <div class="col-xxl-4">
-    <h2 class="h4"><%= t("admin.communication.blocks.templates.chapter.edit.image.label") %></h2>
+
+    <h2 class="h4 mt-5"><%= t("admin.communication.blocks.templates.chapter.edit.image.label") %></h2>
     <%= block_component_edit block, :image %>
     <%= block_component_edit block, :alt,
           label: t('admin.communication.blocks.components.image.alt.label'),
