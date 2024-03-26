@@ -1,4 +1,16 @@
-<%= block_component_edit block, :mode %>
+<div class="row pure__row--small">
+  <div class="col-lg-6">
+    <%= block_component_edit block, :mode %>
+  </div>
+  <div class="col-lg-6">
+    <%= osuny_label t('.display.title') %>
+    <%= block_component_edit block, :hide_image %>
+    <%= block_component_edit block, :hide_summary %>
+    <%= block_component_edit block, :hide_category %>
+    <%= block_component_edit block, :hide_author %>
+    <%= block_component_edit block, :hide_date %>
+  </div>
+</div>
 <div v-if="data.mode !== 'categories'">
   <%= block_component_edit block, :layout %>
 </div>

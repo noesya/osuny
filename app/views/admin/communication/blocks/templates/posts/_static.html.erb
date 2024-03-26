@@ -1,4 +1,9 @@
 <%= block_component_static block, :mode %>
+<%= block_component_static block, :hide_image %>
+<%= block_component_static block, :hide_summary %>
+<%= block_component_static block, :hide_category %>
+<%= block_component_static block, :hide_author %>
+<%= block_component_static block, :hide_date %>
 <% if block.template.mode == 'all' %>
       all: true
 <% elsif block.template.mode == 'category' && block.template.category %>

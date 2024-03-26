@@ -447,6 +447,8 @@ en:
               category_id:
                 label: Category
                 placeholder: Select category
+              display:
+                title: Layout options
               element:
                 id:
                   label: ''
@@ -461,6 +463,16 @@ en:
               posts_quantity:
                 label: Quantity
                 placeholder: Enter quantity
+              hide_author:
+                label: Hide author
+              hide_category:
+                label: Hide categories
+              hide_date:
+                label: Hide date
+              hide_image:
+                label: Hide image
+              hide_summary:
+                label: Hide summary
             layouts:
               alternate:
                 description: Posts either on the left or on the right, composing a graphically light page.

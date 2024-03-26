@@ -447,6 +447,8 @@ fr:
               category_id:
                 label: Catégorie
                 placeholder: Sélectionner une catégorie
+              display:
+                title: Options d'affichage
               element:
                 id:
                   label: ''
@@ -461,6 +463,16 @@ fr:
               posts_quantity:
                 label: Quantité d'articles
                 placeholder: Entrer la quantité
+              hide_author:
+                label: Masquer l'auteur ou l'autrice
+              hide_category:
+                label: Masquer les catégories
+              hide_date:
+                label: Masquer la date
+              hide_image:
+                label: Masquer l'image
+              hide_summary:
+                label: Masquer le résumé
             layouts:
               alternate:
                 description: Une alternance très légère graphiquement d'articles entre la gauche et la droite de la page.

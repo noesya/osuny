@@ -17,6 +17,11 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   ]
   has_component :posts_quantity, :number, options: 3
   has_component :category_id, :post_category
+  has_component :hide_image, :boolean
+  has_component :hide_summary, :boolean
+  has_component :hide_category, :boolean
+  has_component :hide_author, :boolean
+  has_component :hide_date, :boolean
 
   def category
     category_id_component.category
