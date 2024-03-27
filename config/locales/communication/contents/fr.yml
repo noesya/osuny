@@ -291,6 +291,9 @@ fr:
               grid:
                 description: Les images sont présentées en grille, toutes de la même taille.
                 label: Grille
+              large:
+                description: Les images sont présentées l'une après l'autre, en utilisant toute la largeur pour les horizontales et une grande largeur pour les verticales.
+                label: Grand
           image:
             description: Une image avec sa description alternative accessible, son texte et son crédit.
             edit:
